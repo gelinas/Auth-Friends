@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import FriendCard from './FriendCard';
 
 function FriendsList(props) {
@@ -47,13 +47,15 @@ function FriendsList(props) {
     // implement loading spinner
     // if (something) { return <div>loading spinner</div>}
     return (
+        <>
+        <h1>My Friends List</h1>
         <div className="friend-container">
-            <h1>My Friends List</h1>
             {/*error rendering */}
             {friends.map(friend => (
                 <FriendCard key={friend.id} friend={friend} />
             ))}
         </div>
+        </>
     )
 }
 
