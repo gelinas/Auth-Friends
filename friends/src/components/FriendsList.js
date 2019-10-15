@@ -1,47 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+
 import FriendCard from './FriendCard';
 
 function FriendsList(props) {
-    let friends = [
-        {
-          id: 1,
-          name: 'Ben',
-          age: 30,
-          email: 'ben@lambdaschool.com'
-        },
-        {
-          id: 2,
-          name: 'Austen',
-          age: 45,
-          email: 'austen@lambdaschool.com'
-        },
-        {
-          id: 3,
-          name: 'Ryan',
-          age: 15,
-          email: 'ryan@lambdaschool.com'
-        },
-        {
-          id: 4,
-          name: 'Dustin',
-          age: 25,
-          email: 'D-munny@lambdaschool.com'
-        },
-        {
-          id: 5,
-          name: 'Sean',
-          age: 35,
-          email: 'sean@lambdaschool.com'
-        },
-        {
-          id: 6,
-          name: 'Michelle',
-          age: 67,
-          email: 'michelle@gmail.com'
-        }
-      ];
+    const [friends, setFriends] = useState([]);
+
     useEffect(() => {
-        //get request
+        axiosWithAuth()
+        .get('/api/friends')
+        .then(res => {
+            // console.log("get response", res);
+            setFriends(res.data);
+        })
+        .catch(err => console.log(err.response));
     }, []);
 
     // implement loading spinner
